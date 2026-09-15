@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ro">
 <head>
@@ -246,6 +247,26 @@
   }
 
   .note { font-size: .84rem; color: #718096; margin-top: 6px; font-style: italic; }
+
+  .score-total {
+    background: #ebf8ff;
+    border: 1px solid #90cdf4;
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-top: 24px;
+  }
+
+  .score-total h3 { margin-top: 0; color: var(--primary); }
+  .score-total p { margin: 4px 0; }
+
+  .score-total .grand-total {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px solid #63b3ed;
+    color: var(--primary);
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
 </style>
 </head>
 <body>
@@ -477,6 +498,15 @@
       <textarea id="comp" style="min-height:180px" placeholder="Scrie compunerea aici..."></textarea>
     </div>
 
+    <div class="score-total">
+      <h3>Punctajul total al testului</h3>
+      <p>Subiectul A – Înțelegerea textului: <strong>38 de puncte</strong></p>
+      <p>Subiectul B – Limba română: <strong>32 de puncte</strong></p>
+      <p>Subiectul al II-lea – Compunere: <strong>20 de puncte</strong></p>
+      <p>Puncte din oficiu: <strong>10 puncte</strong></p>
+      <p class="grand-total">Total: 100 de puncte</p>
+    </div>
+
     <!-- BUTON -->
     <button class="btn-check" onclick="checkAnswers()">Verifică răspunsurile &amp; Calculează punctajul</button>
 
@@ -509,38 +539,36 @@
   }
 
   function checkAnswers() {
-    let score = 0;
-    let maxAuto = 0;
+    let score = 10;
+    const maxAuto = 100;
     let feedback = [];
 
+    feedback.push('Puncte din oficiu: +10p');
+
     // A1 (2p)
-    maxAuto += 2;
     const nume = (document.getElementById('a1-nume').value || '').toLowerCase().trim();
     const an = (document.getElementById('a1-an').value || '').trim();
     if ((nume.includes('jeni') || nume.includes('acterian')) && an === '1944') {
       score += 2;
       feedback.push('A1: +2p ✓');
     } else {
-      feedback.push('A1: 0p (corect: Jeni Acterian / 1944)');
+      feedback.push(`A1: 0p ✗ (corect: Jeni Acterian / 1944; ai scris: ${nume || 'nimic'} / ${an || 'nimic'})`);
     }
 
     // A2
-    maxAuto += 2;
     const a2 = document.querySelector('input[name="a2"]:checked');
     if (a2 && a2.value === 'c') { score += 2; feedback.push('A2: +2p ✓'); }
-    else feedback.push('A2: 0p (corect: c)');
+    else feedback.push(`A2: 0p ✗ (corect: c)${a2 ? `; ai ales: ${a2.value}` : '; nu ai ales un răspuns'}`);
 
     // A3
-    maxAuto += 2;
     const a3 = document.querySelector('input[name="a3"]:checked');
     if (a3 && a3.value === 'a') { score += 2; feedback.push('A3: +2p ✓'); }
-    else feedback.push('A3: 0p (corect: a)');
+    else feedback.push(`A3: 0p ✗ (corect: a)${a3 ? `; ai ales: ${a3.value}` : '; nu ai ales un răspuns'}`);
 
     // A4
-    maxAuto += 2;
     const a4 = document.querySelector('input[name="a4"]:checked');
     if (a4 && a4.value === 'c') { score += 2; feedback.push('A4: +2p ✓'); }
-    else feedback.push('A4: 0p (corect: c)');
+    else feedback.push(`A4: 0p ✗ (corect: c)${a4 ? `; ai ales: ${a4.value}` : '; nu ai ales un răspuns'}`);
 
     // A5 (6 x 1p)
     const tfCorrect = {
@@ -548,28 +576,32 @@
       't2-1': 'true', 't2-2': 'false', 't2-3': 'true'
     };
     Object.keys(tfCorrect).forEach(k => {
-      maxAuto += 1;
       if (getTF(k) === tfCorrect[k]) {
         score += 1;
+        feedback.push(`A5 ${k}: +1p ✓`);
+      } else {
+        feedback.push(`A5 ${k}: 0p ✗ (corect: ${tfCorrect[k] === 'true' ? 'Adevărat' : 'Fals'})`);
       }
     });
-    feedback.push(`A5 (A/F): ${Object.keys(tfCorrect).filter(k => getTF(k) === tfCorrect[k]).length}/6 puncte`);
 
     // B1-B4
-    const bAnswers = { b1: 'd', b2: 'd', b3: 'a', b4: 'a' };
+    const bAnswers = {
+      b1: ['d', '„ideea”, „iluzie”'],
+      b2: ['d', 'casă, pat, femeie'],
+      b3: ['a', 'indecisă'],
+      b4: ['a', 'seria a)']
+    };
     Object.keys(bAnswers).forEach(name => {
-      maxAuto += 2;
       const sel = document.querySelector(`input[name="${name}"]:checked`);
-      if (sel && sel.value === bAnswers[name]) {
+      if (sel && sel.value === bAnswers[name][0]) {
         score += 2;
         feedback.push(`${name.toUpperCase()}: +2p ✓`);
       } else {
-        feedback.push(`${name.toUpperCase()}: 0p (corect: ${bAnswers[name]})`);
+        feedback.push(`${name.toUpperCase()}: 0p ✗ (corect: ${bAnswers[name][0]}) ${bAnswers[name][1]}${sel ? `; ai ales: ${sel.value}` : '; nu ai ales un răspuns'}`);
       }
     });
 
     // B8 partial (6p) - simple check
-    maxAuto += 6;
     const b8 = [
       document.getElementById('b8-1').value.trim().toLowerCase(),
       document.getElementById('b8-2').value.trim().toLowerCase(),
@@ -581,14 +613,31 @@
     const b8ok = ['insulei', 'celui mai disperat', 'căruia', 'aflându-se', 'spera', 'și'];
     let b8score = 0;
     b8.forEach((v, i) => {
-      if (v.includes(b8ok[i].split(' ')[0]) || v === b8ok[i]) b8score += 1;
+      if (v === b8ok[i]) b8score += 1;
     });
     score += b8score;
-    feedback.push(`B8: ${b8score}/6 puncte`);
+    b8ok.forEach((answer, index) => {
+      if (b8[index] !== answer) {
+        feedback.push(`B8.${index + 1}: 0p ✗ (corect: ${answer}; ai scris: ${b8[index] || 'nimic'})`);
+      } else {
+        feedback.push(`B8.${index + 1}: +1p ✓`);
+      }
+    });
 
-    // Open questions note
-    feedback.push('---');
-    feedback.push('A6–A9, B5–B7 și Compunerea se evaluează de profesor (nu sunt auto-punctate).');
+    // Răspunsurile deschise primesc punctajul complet când au fost completate.
+    const openQuestions = [
+      ['a6', 'A6', 6], ['a7', 'A7', 6], ['a8', 'A8', 6], ['a9', 'A9', 6],
+      ['b5', 'B5', 6], ['b6', 'B6', 6], ['b7', 'B7', 6], ['comp', 'Compunere', 20]
+    ];
+    openQuestions.forEach(([id, label, points]) => {
+      const answer = document.getElementById(id).value.trim();
+      if (answer) {
+        score += points;
+        feedback.push(`${label}: +${points}p (completat)`);
+      } else {
+        feedback.push(`${label}: 0/${points} puncte (necompletat)`);
+      }
+    });
 
     // Display
     const box = document.getElementById('result-box');
@@ -605,11 +654,11 @@
 
     box.innerHTML = `
       <div class="score-summary">
-        <span class="score-label">Punctaj automat</span>
+        <span class="score-label">Punctaj total</span>
         <strong class="score-value">${score} / ${maxAuto}</strong>
       </div>
       <ul class="feedback-list">${feedbackItems}</ul>
-      <p class="teacher-note">Restul punctelor (A6-A9, B5-B7, Compunere ≈ 50p) se acordă de profesor.</p>
+      <p class="teacher-note">Punctajul este calculat din toate exercițiile: răspunsurile deschise primesc punctajul exercițiului când sunt completate. Verifică manual calitatea răspunsurilor redactate.</p>
     `;
 
     box.scrollIntoView({ behavior: 'smooth' });
