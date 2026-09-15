@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluare Națională – Rezolvare completă | Textul 1 + Textul 2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Merriweather:wght@400;700&amp;display=swap');
+  
+  :root {
+    --primary: #1a365d;
+    --accent: #2b6cb0;
+    --correct: #276749;
+    --light-bg: #f7fafc;
+    --border: #e2e8f0;
+  }
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    font-family: 'Roboto', system-ui, sans-serif;
+    line-height: 1.55;
+    color: #1a202c;
+    background: #edf2f7;
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+  
+  header {
+    background: linear-gradient(135deg, #1a365d, #2b6cb0);
+    color: white;
+    padding: 28px 32px;
+    text-align: center;
+  }
+  
+  header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  
+  header p {
+    opacity: 0.9;
+    font-size: 0.95rem;
+  }
+  
+  .badge {
+    display: inline-block;
+    background: #48bb78;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-top: 10px;
+  }
+  
+  .content { padding: 28px 32px; }
+  
+  h2 {
+    color: var(--primary);
+    font-size: 1.25rem;
+    margin: 28px 0 14px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--accent);
+  }
+  
+  h3 {
+    color: #2d3748;
+    font-size: 1.05rem;
+    margin: 20px 0 10px;
+  }
+  
+  .text-box {
+    background: var(--light-bg);
+    border-left: 4px solid var(--accent);
+    padding: 16px 18px;
+    margin: 12px 0 20px;
+    border-radius: 0 8px 8px 0;
+    font-family: 'Merriweather', Georgia, serif;
+    font-size: 0.95rem;
+  }
+  
+  .text-box .source {
+    font-size: 0.85rem;
+    color: #4a5568;
+    margin-top: 10px;
+    font-style: italic;
+  }
+  
+  .exercise {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 14px 0;
+  }
+  
+  .exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .points {
+    background: #ebf8ff;
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+  
+  .answer {
+    background: #f0fff4;
+    border: 1px solid #9ae6b4;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 10px;
+    color: var(--correct);
+    font-weight: 500;
+  }
+  
+  .answer strong { color: #22543d; }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 0.95rem;
+  }
+  
+  th, td {
+    border: 1px solid #cbd5e0;
+    padding: 10px 12px;
+    text-align: left;
+  }
+  
+  th {
+    background: #edf2f7;
+    font-weight: 600;
+  }
+  
+  .true { background: #c6f6d5; color: #22543d; font-weight: 600; text-align: center; }
+  .false { background: #fed7d7; color: #9b2c2c; font-weight: 600; text-align: center; }
+  
+  .compunere {
+    background: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 12px;
+    font-family: 'Merriweather', Georgia, serif;
+    line-height: 1.7;
+  }
+  
+  .compunere .date {
+    text-align: right;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: #2d3748;
+  }
+  
+  .note {
+    font-size: 0.85rem;
+    color: #718096;
+    margin-top: 8px;
+    font-style: italic;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 18px;
+    background: #f7fafc;
+    color: #718096;
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+  }
+  
+  @media print {
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Evaluare Națională – Limba și literatura română</h1>
+    <p>Test recapitulativ după programa claselor V-VIII</p>
+    <div class="badge">✓ REZOLVARE COMPLETĂ</div>
+  </header>
+
+  <div class="content">
+
+    <!-- ===================== TEXTUL 1 ===================== -->
+    <h2>TEXTUL 1</h2>
+    <div class="text-box">
+      <p>Văzând că ușa îi rezista, iar în casă se așternuse liniștea, Eusebiu se gândi că cel mai bun lucru pe care îl avea de făcut era să aștepte ca doctorul Basilius să iasă, așa cum promisese. Atunci avea să i se înfățișeze și să-l călăuzească la Esther. Furtuna continua. Mugetele mării și șuierul vântului rămăseseră neschimbate. [...] A așteptat așa timp de o oră. Apoi, văzând că ușa rămâne închisă, că niciun zgomot din interiorul casei nu anunța că doctorul se pregătea să-și onoreze promisiunea, a început să bată iarăși, dar de data asta nu disperat, ci ca apucat de turbare. [...]</p>
+      <p>— Sărmană Esther, ești așadar condamnată și nu voi găsi oare niciun suflet milostiv dispus să te smulgă morții care vrea să te ia la nici douăzeci de ani? Ah, vreau să lupt până la capăt, să-ți ocrotesc viața până când Dumnezeu însuși o să te smulgă din mâinile mele. Apoi, ca și cum tocmai ar fi luat o decizie dificilă, lansându-se într-o cursă furioasă, Eusebiu parcurse restul drumului în câteva clipe și se duse să bată la ușa unuia dintre medicii cei mai faimoși din Batavia. Nici acolo servitorii nu-l lăsară să pătrundă la stăpânul lor. Dar acesta îi auzi suspinele, strigătele și rugămințile și veni la el. Eusebiu îi făcu cunoscută cererea lui.</p>
+      <p>— De ce boală suferă soția dumitale? îl întrebă medicul.</p>
+      <p>— Până acum a fost tratată de ftizie pulmonară – răspunse Eusebiu. Medicul clătină din cap, merse la o masă, scrise câteva rânduri pe o bucățică de hârtie, pe care i-o întinse tânărului.</p>
+      <p>— Du-ți soția mâine-dimineață la spital. Iată un bilet de intrare, cere pentru ea un pat în salonul D, iar eu îi voi da îngrijirile trebuincioase; dar nu vreau să-ți ascund că această boală, care în Europa este aproape întotdeauna mortală, n-a fost vindecată aici niciodată, deși empiristul acela de Basilius pretinde că poate lecui până și ftiziicii de gradul al treilea. [...]</p>
+      <p>O lumină firavă se strecura printre împletiturile unei rogojini care servea în același timp și de ușă, și de fereastră. Această lumină venea de la lămpița de noapte care ardea la căpătâiul bolnavei. Zărind-o, Eusebiu tresări.</p>
+      <p>— Vai, Doamne – zise el –, așa firavă cum este, această luminiță a avut o viață mai lungă decât sărmana mea Esther.</p>
+      <p>Spaima lui era atât de puternică, încât tânărul șovăia să intre în casă. În sfârșit, adunându-și toate puterile, ridică rogojina și, repezindu-se în odaie, alergă spre patul jalnic pe care zăcea Esther. Tânăra femeie stătea nemișcată și părea adormită; avea ochii închiși, gura întredeschisă și parcă era fără răsuflare. Atunci un gând cumplit trecu ca un fulger întunecat prin creierul lui Eusebiu, care se grăbi să se aplece spre buzele lui Esther spre a-i asculta respirația, când un fel de râs batjocoritor care venea dintr-un colț al camerei îl făcu să tresară. Se întoarse într-acolo și desluși în penumbră un bărbat așezat pe un taburet de bambus. Bărbatul acela trăgea dintr-o pipă care, la fiecare aspirație, străpungea semi-întunericul, iscând un cerculeț roșu.</p>
+      <p>— Ei – făcu necunoscutul –, se pare că te-ai cam abătut din drum, tânărul meu prieten, căci, cât de departe ar fi casa lui Palétuviers de aici, te aștept de mai bine de o oră.</p>
+      <p>— Cine sunteți dumneavoastră, domnule? întrebă Eusebiu stupefiat.</p>
+      <p>— Doctorul Basilius, la naiba! îi răspunse omul cu pipa.</p>
+      <p class="source">(Alexandre Dumas, <em>Insula de foc</em>)</p>
+    </div>
+
+    <!-- ===================== TEXTUL 2 ===================== -->
+    <h2>TEXTUL 2</h2>
+    <div class="text-box">
+      <p><strong>15 octombrie 1946</strong></p>
+      <p>Am răcit. Nu mai avusesem guturai de doi ani. Mi-a telefonat Lucia Vasiliu. Are expoziție la Căminul Artei. Sâmbătă e vernisajul. M-am simțit în sfârșit și am dat un telefon lui Cella Delavrancea. Am aflat astfel că ieri s-a întors Nuni de la Câmpulung și e bolnavă rău. Aș fi vrut să mă duc chiar azi la ea, dar am doctorul la 7 și seara a luat Clody Berthola biletul la Melo. Înainte de 7, dacă mă fâlfâi cu guturaiul ăsta, înseamnă să cad la pat. Mi-e dor de Sănduc Dragomir de două zile tare de tot. Când îmi amintesc mutra lui șifonată, zâmbetul lui reținut și tăcut, se răsucește ceva în mine și mă doare fizic. Sunt idioată. Orice dragoste adevărată este o boală. Am exact simptome de om bolnav. Am momente de indiferență totală. Zile întregi când nu mă gândesc la el și chiar când mă gândesc mă lasă rece. Și pe urmă mă apucă dintr-odată. E ca o criză. Sunt furioasă pe mine, dar nu pot nega această realitate. Îl urăsc și-l iubesc. Un ins detestabil pe care-l ador stupid. Nu știu precis ce iubesc la el. Am încercat să gândesc clar, să analizez, să despic științific firul de păr în 20. Oare-l iubesc pentru că-mi rezistă, pentru că mă fierbe? Probabil că asta este totuși una din cauze. Atitudinea asta a lui în doi peri este una din cauze. E categoric seducător un om care nu știi precis ce vrea, ce e, ce gândește. Dar nu e asta totul. E cert că nu e asta totul. Îmi place. Mă impresionează. Expresia lui mă impresionează, ochii lui mă impresionează, tăcerea lui mă impresionează. E o tăcere plină, o tăcere semnificativă, o tăcere care se chinuie și mă adoră. Nu pot scăpa de ideea asta cretină că mă iubește imens de mult. Ideea asta contradictorie, dezmințită de toate tâmpeniile pe care le-a spus, dezmințită de faptul că trece atâta timp și totuși rezistă, dezmințită de faptul că nu face nicio concesie. Și totuși simt că mă iubește. Sau sunt nebună, și e o iluzie creată de dragostea mea pentru el și de foarte naturala dorință de reciprocitate, sau e el nebun, mă iubește și din orgoliu și încăpățânare strică un lucru frumos.</p>
+      <p class="source">(Jeni Acterian, <em>Jurnalul unei fete greu de mulțumit</em>)</p>
+    </div>
+
+    <!-- ===================== SUBIECTUL A ===================== -->
+    <h2>A. ÎNȚELEGEREA TEXTULUI</h2>
+
+    <!-- 1 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>1.</strong> Completează spațiile libere cu informațiile din textul 2.
+        <span class="points">2 puncte</span>
+      </div>
+      <p>Din jurnalul lui <strong>Jeni Acterian</strong>, reiese că aceasta nu mai avusese guturai din anul <strong>1944</strong>.</p>
+      <div class="answer">
+        <strong>Răspuns:</strong> Jeni Acterian / 1944<br>
+        <span class="note">Justificare: „Nu mai avusesem guturai de doi ani.” + data 15 octombrie 1946 → 1946 − 2 = 1944.</span>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>2.</strong> Încercuiește litera corespunzătoare răspunsului corect, valorificând textul 1.
+        <span class="points">2 puncte</span>
+      </div>
+      <p>Faptul că medicul clatină din cap este un semn al:</p>
+      <p>a) dezamăgirii. &nbsp;&nbsp; b) tristeții. &nbsp;&nbsp; c) neputinței. &nbsp;&nbsp; d) enervării.</p>
+      <div class="answer">
+        <strong>Răspuns corect: c) neputinței.</strong><br>
+        <span class="note">Medicul clatină din cap după ce aude diagnosticul de ftizie pulmonară și îi spune că boala este aproape întotdeauna mortală – gest de neputință / resemnare.</span>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>3.</strong> Încercuiește litera corespunzătoare răspunsului corect, valorificând textul 2.
+        <span class="points">2 puncte</span>
+      </div>
+      <p>Nota de jurnal este scrisă sub formă de:</p>
+      <p>a) monolog. &nbsp;&nbsp; b) descriere. &nbsp;&nbsp; c) narațiune. &nbsp;&nbsp; d) dialog.</p>
+      <div class="answer">
+        <strong>Răspuns corect: a) monolog.</strong><br>
+        <span class="note">Textul este un jurnal intim, discurs interior, confesiune – monolog.</span>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>4.</strong> Încercuiește litera corespunzătoare răspunsului corect, valorificând textul 2.
+        <span class="points">2 puncte</span>
+      </div>
+      <p>Jeni Acterian are sentimente contradictorii față de:</p>
+      <p>a) Lucia Vasiliu. &nbsp;&nbsp; b) Cella Delavrancea. &nbsp;&nbsp; c) Sănduc Dragomir. &nbsp;&nbsp; d) Clody Berthola.</p>
+      <div class="answer">
+        <strong>Răspuns corect: c) Sănduc Dragomir.</strong><br>
+        <span class="note">„Îl urăsc și-l iubesc. Un ins detestabil pe care-l ador stupid.”</span>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>5.</strong> Notează „X” în dreptul fiecărui enunț pentru a stabili dacă este adevărat sau fals.
+        <span class="points">6 puncte</span>
+      </div>
+
+      <h3>TEXTUL 1</h3>
+      <table>
+        <tr>
+          <th>Enunțul</th>
+          <th>Adevărat</th>
+          <th>Fals</th>
+        </tr>
+        <tr>
+          <td>Doctorii i-au deschis imediat ușa lui Eusebiu.</td>
+          <td></td>
+          <td class="false">X</td>
+        </tr>
+        <tr>
+          <td>Eusebiu și Esther trăiesc în condiții grele.</td>
+          <td class="true">X</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Întâmplarea relatată se petrece într-o noapte liniștită.</td>
+          <td></td>
+          <td class="false">X</td>
+        </tr>
+      </table>
+
+      <h3>TEXTUL 2</h3>
+      <table>
+        <tr>
+          <th>Enunțul</th>
+          <th>Adevărat</th>
+          <th>Fals</th>
+        </tr>
+        <tr>
+          <td>Jeni Acterian urmează să meargă la doctor.</td>
+          <td class="true">X</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Jeni Acterian are guturai în timpul verii.</td>
+          <td></td>
+          <td class="false">X</td>
+        </tr>
+        <tr>
+          <td>Autoarea jurnalului compară dragostea cu o boală.</td>
+          <td class="true">X</td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 6 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>6.</strong> Prezintă, în unu – trei enunțuri, o trăsătură a jurnalului, valorificând textul 2.
+        <span class="points">6 puncte</span>
+      </div>
+      <div class="answer">
+        O trăsătură a jurnalului este <strong>subiectivitatea</strong> (sau caracterul confesiv / intimitatea). Autoarea își exprimă direct stările interioare, sentimentele contradictorii față de Sănduc Dragomir și îndoielile legate de propria dragoste, fără a urmări o narațiune obiectivă.
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>7.</strong> Prezintă, în minimum 30 de cuvinte, modul în care o temă comună este reflectată în cele două texte, valorificând câte o secvență relevantă din fiecare text.
+        <span class="points">6 puncte</span>
+      </div>
+      <div class="answer">
+        Tema comună este <strong>boala / suferința</strong>. În textul 1, Esther suferă de ftizie pulmonară, boală considerată mortală, iar Eusebiu se confruntă cu disperarea și neputința medicilor („această boală, care în Europa este aproape întotdeauna mortală”). În textul 2, Jeni Acterian compară dragostea cu o boală: „Orice dragoste adevărată este o boală. Am exact simptome de om bolnav.” Ambele texte arată suferința ca pe o stare care afectează profund personajele.
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>8.</strong> Ce atitudine dezvoltă Jeni Acterian față de propria persoană? Justifică-ți, în 50–100 de cuvinte, răspunsul, prin referire la o emoție, valorificând textul 2.
+        <span class="points">6 puncte</span>
+      </div>
+      <div class="answer">
+        Jeni Acterian dezvoltă o atitudine <strong>autocritică / severă</strong> față de sine. Se autocalifică drept „idioată” și recunoaște că are „simptome de om bolnav”. Emoția dominantă este <strong>furia față de sine</strong> („Sunt furioasă pe mine”), generată de faptul că nu poate controla sentimentele contradictorii față de Sănduc. Se simte prinsă într-o stare pe care o consideră stupidă și contradictorie, ceea ce arată o conștiință de sine lucidă, dar auto-punitivă.
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>9.</strong> Asociază fragmentul din <em>Insula de foc</em>, de Alexandre Dumas, cu un alt text literar studiat la clasă sau citit ca lectură suplimentară, prezentând, în 50–100 de cuvinte, o valoare comună, prin referire la câte o secvență relevantă din fiecare text.
+        <span class="points">6 puncte</span>
+      </div>
+      <div class="answer">
+        Fragmentul din <em>Insula de foc</em> poate fi asociat cu romanul <em>Moara cu noroc</em> de Ioan Slavici. Valoarea comună este <strong>iubirea care generează suferință și conflict interior</strong>. În textul lui Dumas, Eusebiu este disperat din cauza bolii soției sale Esther și luptă până la capăt pentru a-i salva viața. În <em>Moara cu noroc</em>, Ghiță trăiește un conflict puternic între iubirea pentru Ana și dorința de îmbogățire, ceea ce îl duce la suferință morală și la tragedie. În ambele cazuri, iubirea este legată de o stare de tensiune și de riscul pierderii.
+      </div>
+    </div>
+
+    <!-- ===================== SUBIECTUL B ===================== -->
+    <h2>B. LIMBA ROMÂNĂ</h2>
+
+    <!-- B1 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>1.</strong> Încercuiește litera corespunzătoare răspunsului corect.
+        <span class="points">2 puncte</span>
+      </div>
+      <p>Conțin hiat ambele cuvinte din seria:</p>
+      <p>a) „furioasă”, „unuia”. &nbsp;&nbsp; b) „trebuincioase”, „ea”. &nbsp;&nbsp; c) „lecui”, „stupefiat”. &nbsp;&nbsp; d) „ideea”, „iluzie”.</p>
+      <div class="answer">
+        <strong>Răspuns corect: d) „ideea”, „iluzie”.</strong><br>
+        <span class="note">ideea = i-de-e-a (hiat e-a); iluzie = i-lu-zi-e (hiat i-e).</span>
+      </div>
+    </div>
+
+    <!-- B2 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>2.</strong> Încercuiește litera corespunzătoare răspunsului corect.
+        <span class="points">2 puncte</span>
+      </div>
+      <p>Aparțin vocabularului fundamental toate cuvintele din seria:</p>
+      <p>a) să onoreze, sărmană, stupefiat. &nbsp;&nbsp; b) decizie, dificilă, servitori. &nbsp;&nbsp; c) soție, trebuincios, ftizie. &nbsp;&nbsp; d) casă, pat, femeie.</p>
+      <div class="answer">
+        <strong>Răspuns corect: d) casă, pat, femeie.</strong><br>
+        <span class="note">Cuvintele din d) fac parte din vocabularul de bază / fundamental; celelalte conțin termeni mai rar folosiți sau de specialitate (ftizie, stupefiat etc.).</span>
+      </div>
+    </div>
+
+    <!-- B3 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>3.</strong> Încercuiește litera corespunzătoare răspunsului corect.
+        <span class="points">2 puncte</span>
+      </div>
+      <p>Sensul structurii subliniate în enunțul „Atitudinea asta a lui <u>în doi peri</u> este una din cauze.” este:</p>
+      <p>a) indecisă. &nbsp;&nbsp; b) simplă. &nbsp;&nbsp; c) intimidantă. &nbsp;&nbsp; d) ironică.</p>
+      <div class="answer">
+        <strong>Răspuns corect: a) indecisă.</strong><br>
+        <span class="note">„În doi peri” = ambiguă, neclară, care nu se angajează clar (indecisă).</span>
+      </div>
+    </div>
+
+    <!-- B4 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>4.</strong> Încercuiește litera corespunzătoare răspunsului corect.
+        <span class="points">2 puncte</span>
+      </div>
+      <p>Există o relație de polisemie între cuvintele subliniate în secvențele/enunțurile din seria:</p>
+      <p>a) „Medicul clătină din cap, merse la o <u>masă</u>, scrise câteva rânduri”; <u>Masa</u> corpului este mică.</p>
+      <p>b) „văzând că ușa rămâne închisă, [...] a început să <u>bată</u> iarăși”; <u>Vântul</u> bate cu putere.</p>
+      <p>c) „un fel de <u>râs</u> batjocoritor [...] îl făcu să tresară”; Am văzut un <u>râs</u> cu blana strălucitoare.</p>
+      <p>d) „Bărbatul acela trăgea dintr-o <u>pipă</u>”; Medicul <u>pipăi</u> mușchiul umflat.</p>
+      <div class="answer">
+        <strong>Răspuns corect: a)</strong><br>
+        <span class="note">„masă” = mobilier / cantitate de materie → polisemie. În b) „bate” are sensuri diferite (a lovi / a sufla), dar nu e aceeași rădăcină în același mod; c) și d) sunt omonime (râs animal / râs sunet; pipă obiect / a pipăi).</span>
+      </div>
+    </div>
+
+    <!-- B5 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>5.</strong> Transcrie trei pronume din fragmentul următor, precizând cazul fiecăruia:
+        <span class="points">6 puncte</span>
+      </div>
+      <p>„Dar acesta îi auzi suspinele, strigătele și rugămințile și veni la el. Eusebiu îi făcu cunoscută cererea lui.”</p>
+      <table>
+        <tr>
+          <th>Pronumele selectat</th>
+          <th>Felul pronumelui selectat / Cazul</th>
+        </tr>
+        <tr>
+          <td>acesta</td>
+          <td>pronume demonstrativ, cazul nominativ</td>
+        </tr>
+        <tr>
+          <td>îi</td>
+          <td>pronume personal, cazul dativ</td>
+        </tr>
+        <tr>
+          <td>el / lui</td>
+          <td>pronume personal, cazul acuzativ (el) / genitiv (lui)</td>
+        </tr>
+      </table>
+      <div class="answer">
+        <strong>Exemple corecte:</strong><br>
+        • acesta – demonstrativ, nominativ<br>
+        • îi – personal, dativ<br>
+        • el – personal, acuzativ (sau lui – genitiv)
+      </div>
+    </div>
+
+    <!-- B6 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>6.</strong> Alcătuiește un enunț asertiv, în care numeralul 15 (scris în litere) să fie subiect (1), și un enunț exclamativ, în care substantivul „iubire” să fie complement indirect (2).
+        <span class="points">6 puncte</span>
+      </div>
+      <div class="answer">
+        (1) <strong>Cincisprezece</strong> elevi au participat la concursul de literatură.<br>
+        (2) Cât de mult țin la <strong>iubire</strong>!
+      </div>
+    </div>
+
+    <!-- B7 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>7.</strong> Explică rolul a două semne de punctuație, la alegere, din secvența:
+        <span class="points">6 puncte</span>
+      </div>
+      <p>„— Cine sunteți dumneavoastră, domnule? întrebă Eusebiu stupefiat.”</p>
+      <div class="answer">
+        • <strong>Linia de dialog (—)</strong> marchează începutul vorbirii directe a personajului.<br>
+        • <strong>Semnul întrebării (?)</strong> arată că enunțul este o interogație directă.<br>
+        (Se pot alege și virgula – separă apelativul „domnule” – sau punctul de la finalul propoziției de după dialog.)
+      </div>
+    </div>
+
+    <!-- B8 -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <strong>8.</strong> Completează enunțul următor cu formele corecte ale cuvintelor indicate între paranteze.
+        <span class="points">6 puncte</span>
+      </div>
+      <p>Pe ulițele <strong>insulei</strong> (insulă, genitiv) se aud încă strigătele <strong>celui mai disperat</strong> (disperat, superlativ relativ de superioritate) bărbat, a <strong>căruia</strong> (care, masculin, singular, genitiv) soție <strong>aflându-se</strong> (adjectiv participial de la a afla) pe patul de suferință încă <strong>spera</strong> (a spera, imperfect) să-<strong>și</strong> (clitic pronominal reflexiv, dativ) revadă fiica.</p>
+      <div class="answer">
+        <strong>Forme corecte:</strong><br>
+        insulei / celui mai disperat / căruia / aflându-se / spera / să-și
+      </div>
+    </div>
+
+    <!-- ===================== SUBIECTUL II ===================== -->
+    <h2>SUBIECTUL al II-lea – Compunere (20 puncte)</h2>
+    <div class="exercise">
+      <p><strong>Cerință:</strong> Imaginează-ți că ai vizitat, alături de colegii de clasă, o insulă misterioasă. Redactează o notă de jurnal, de cel puțin 150 de cuvinte, în care să relatezi această experiență, incluzând o secvență explicativă și una descriptivă, fiecare de minimum 30 de cuvinte. Data redactării jurnalului este 12 octombrie 2023.</p>
+      
+      <div class="compunere">
+        <div class="date">12 octombrie 2023</div>
+        
+        <p>Astăzi am trăit una dintre cele mai neobișnuite experiențe din viața mea. Împreună cu colegii de clasă am vizitat o insulă misterioasă, despre care se spunea că ar ascunde secrete vechi. Deși la început am crezut că e doar o excursie obișnuită, realitatea a fost cu totul alta.</p>
+        
+        <p>Insula se află departe de țărmul cunoscut și este acoperită aproape în întregime de o pădure densă, cu copaci înalți și frunze de un verde intens, care parcă ascund soarele. Aerul este greu, încărcat de mirosul de pământ ud și de flori sălbatice necunoscute. Pe măsură ce înaintam pe poteca îngustă, am auzit sunete ciudate – un fel de șuierat prelung, ca și cum vântul ar fi vorbit printre crengi. Lumina abia pătrundea printre frunziș, iar umbrele se mișcau ciudat pe solul acoperit de mușchi. Am descoperit și o peșteră mică, cu pereții umezi și cu stalactite care străluceau slab, ca niște pietre prețioase. Totul părea scos dintr-o poveste.</p>
+        
+        <p>De ce este însă această insulă atât de misterioasă? Profesorii ne-au explicat că locul a fost locuit cândva de o comunitate izolată, care a dispărut fără urmă în urmă cu mai bine de un secol. Legendele locale spun că oamenii de acolo ar fi descoperit o forță necunoscută a naturii și că au preferat să rămână departe de lume. Tocmai din cauza acestor povești, accesul pe insulă este restricționat și numai grupuri însoțite de ghizi pot pătrunde. Am înțeles astfel de ce aerul era atât de greu și de ce pădurea părea să ne observe. Misterul nu vine doar din peisaj, ci și din istoria pe care o poartă fiecare piatră și fiecare copac.</p>
+        
+        <p>M-am întors acasă cu un sentiment straniu, ca și cum aș fi privit pentru o clipă într-o altă lume. Nu știu dacă voi mai ajunge vreodată acolo, dar sunt sigură că nu voi uita niciodată acea zi.</p>
+      </div>
+      <p class="note">Compunerea respectă: data, minimum 150 de cuvinte, secvență descriptivă (peisajul), secvență explicativă (de ce e misterioasă), stil de jurnal.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    Rezolvare realizată pe baza textelor din testul „Start pentru succes! Simulare Evaluare Națională” – clasele V-VIII<br>
+    Toate răspunsurile sunt justificate pe baza textelor date.<br>
+    Created by qShadow/9xShadow/Vexor/Ciurlica Denis
+  </footer>
+</div>
+</body>
+</html>
