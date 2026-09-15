@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluare Națională Interactivă | Created by qShadow</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Merriweather:wght@400;700&display=swap');
+
+  :root {
+    --primary: #1a365d;
+    --accent: #2b6cb0;
+    --correct: #276749;
+    --wrong: #c53030;
+    --light: #f7fafc;
+    --border: #e2e8f0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Roboto', system-ui, sans-serif;
+    background: #edf2f7;
+    color: #1a202c;
+    line-height: 1.55;
+    padding: 16px;
+  }
+
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px -8px rgba(0,0,0,.12);
+    overflow: hidden;
+  }
+
+  header {
+    background: linear-gradient(135deg, #1a365d, #2b6cb0);
+    color: white;
+    padding: 26px 28px;
+    text-align: center;
+  }
+
+  header h1 { font-size: 1.55rem; margin-bottom: 4px; }
+  header p { opacity: .9; font-size: .95rem; }
+
+  .creator {
+    margin-top: 12px;
+    display: inline-block;
+    background: rgba(255,255,255,.18);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: .9rem;
+  }
+
+  .content { padding: 24px 28px 40px; }
+
+  h2 {
+    color: var(--primary);
+    font-size: 1.22rem;
+    margin: 28px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  h3 { font-size: 1.05rem; margin: 18px 0 8px; color: #2d3748; }
+
+  .text-box {
+    background: var(--light);
+    border-left: 4px solid var(--accent);
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    border-radius: 0 8px 8px 0;
+    font-family: 'Merriweather', Georgia, serif;
+    font-size: .93rem;
+  }
+
+  .source { font-size: .84rem; color: #4a5568; font-style: italic; margin-top: 8px; }
+
+  .exercise {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin: 14px 0;
+    background: #fff;
+  }
+
+  .exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .points {
+    background: #ebf8ff;
+    color: var(--accent);
+    font-size: .78rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+
+  .options label {
+    display: block;
+    padding: 8px 12px;
+    margin: 5px 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .15s;
+  }
+
+  .options label:hover { background: #f0f7ff; border-color: #90cdf4; }
+
+  .options input { margin-right: 8px; }
+
+  input[type="text"], textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    font-size: .95rem;
+    margin-top: 6px;
+    font-family: inherit;
+  }
+
+  textarea { min-height: 90px; resize: vertical; }
+
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: .93rem; }
+  th, td { border: 1px solid #cbd5e0; padding: 9px 11px; }
+  th { background: #edf2f7; }
+
+  .tf-btn {
+    display: inline-block;
+    padding: 5px 14px;
+    margin: 0 4px;
+    border: 1px solid #a0aec0;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #edf2f7;
+    font-size: .85rem;
+    user-select: none;
+  }
+
+  .tf-btn.selected-true { background: #c6f6d5; border-color: #38a169; color: #22543d; font-weight: 600; }
+  .tf-btn.selected-false { background: #fed7d7; border-color: #e53e3e; color: #9b2c2c; font-weight: 600; }
+
+  .btn-check {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin: 30px auto 10px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #2b6cb0, #1a365d);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+  }
+
+  .btn-check:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(43,108,176,.35); }
+
+  #result-box {
+    display: none;
+    margin-top: 28px;
+    padding: 24px;
+    border-radius: 14px;
+    text-align: left;
+    font-size: 1rem;
+    animation: result-entry .35s ease-out;
+  }
+
+  .score-ok { background: linear-gradient(135deg, #f0fff4, #ffffff); border: 2px solid #68d391; color: #22543d; }
+  .score-mid { background: linear-gradient(135deg, #fffaf0, #ffffff); border: 2px solid #f6ad55; color: #744210; }
+  .score-low { background: linear-gradient(135deg, #fff5f5, #ffffff); border: 2px solid #fc8181; color: #742a2a; }
+
+  .score-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid currentColor;
+    opacity: .9;
+  }
+
+  .score-label { font-size: .95rem; font-weight: 600; }
+  .score-value { font-size: 2rem; line-height: 1; font-weight: 700; white-space: nowrap; }
+
+  .feedback-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin: 18px 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .feedback-list li {
+    padding: 9px 12px;
+    border-radius: 7px;
+    background: rgba(255,255,255,.72);
+    font-size: .92rem;
+  }
+
+  .feedback-list .feedback-ok { background: #dcfce7; color: #166534; }
+  .feedback-list .feedback-neutral { background: rgba(255,255,255,.6); }
+  .teacher-note {
+    margin: 0;
+    padding-top: 16px;
+    border-top: 1px dashed currentColor;
+    font-size: .9rem;
+    opacity: .85;
+  }
+
+  @keyframes result-entry {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 560px) {
+    #result-box { padding: 18px; }
+    .score-summary { align-items: flex-start; flex-direction: column; }
+    .feedback-list { grid-template-columns: 1fr; }
+  }
+
+  .feedback { margin-top: 10px; font-size: .95rem; }
+  .correct-ans { color: var(--correct); font-weight: 500; margin-top: 6px; font-size: .9rem; }
+  .wrong-mark { border-color: var(--wrong) !important; background: #fff5f5 !important; }
+  .right-mark { border-color: #38a169 !important; background: #f0fff4 !important; }
+
+  footer {
+    text-align: center;
+    padding: 16px;
+    background: #f7fafc;
+    color: #718096;
+    font-size: .85rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .note { font-size: .84rem; color: #718096; margin-top: 6px; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Evaluare Națională – Limba și literatura română</h1>
+    <p>Test interactiv recapitulativ (clasele V-VIII)</p>
+    <div class="creator">Created by qShadow / 9xShadow / Vexor / Ciurlica Denis</div>
+  </header>
+
+  <div class="content">
+
+    <!-- TEXTELE -->
+    <h2>TEXTUL 1</h2>
+    <div class="text-box">
+      <p>Văzând că ușa îi rezista, iar în casă se așternuse liniștea, Eusebiu se gândi că cel mai bun lucru pe care îl avea de făcut era să aștepte ca doctorul Basilius să iasă, așa cum promisese. [...] Medicul clătină din cap, merse la o masă, scrise câteva rânduri pe o bucățică de hârtie... „această boală, care în Europa este aproape întotdeauna mortală...” [...] — Doctorul Basilius, la naiba! îi răspunse omul cu pipa.</p>
+      <p class="source">(Alexandre Dumas, <em>Insula de foc</em>)</p>
+    </div>
+
+    <h2>TEXTUL 2</h2>
+    <div class="text-box">
+      <p><strong>15 octombrie 1946</strong></p>
+      <p>Am răcit. Nu mai avusesem guturai de doi ani. [...] Mi-e dor de Sănduc Dragomir de două zile tare de tot. [...] Sunt idioată. Orice dragoste adevărată este o boală. [...] Îl urăsc și-l iubesc. Un ins detestabil pe care-l ador stupid. [...] Atitudinea asta a lui în doi peri este una din cauze.</p>
+      <p class="source">(Jeni Acterian, <em>Jurnalul unei fete greu de mulțumit</em>)</p>
+    </div>
+
+    <!-- ========== A ========== -->
+    <h2>A. ÎNȚELEGEREA TEXTULUI</h2>
+
+    <!-- A1 -->
+    <div class="exercise" id="ex-a1">
+      <div class="exercise-header">
+        <strong>1.</strong> Completează spațiile libere cu informațiile din textul 2.
+        <span class="points">2 puncte</span>
+      </div>
+      <p>Din jurnalul lui <input type="text" id="a1-nume" placeholder="nume autor" style="width:180px;display:inline-block">, reiese că aceasta nu mai avusese guturai din anul <input type="text" id="a1-an" placeholder="an" style="width:80px;display:inline-block">.</p>
+    </div>
+
+    <!-- A2 -->
+    <div class="exercise" id="ex-a2">
+      <div class="exercise-header">
+        <strong>2.</strong> Faptul că medicul clatină din cap este un semn al:
+        <span class="points">2 puncte</span>
+      </div>
+      <div class="options">
+        <label><input type="radio" name="a2" value="a"> a) dezamăgirii</label>
+        <label><input type="radio" name="a2" value="b"> b) tristeții</label>
+        <label><input type="radio" name="a2" value="c"> c) neputinței</label>
+        <label><input type="radio" name="a2" value="d"> d) enervării</label>
+      </div>
+    </div>
+
+    <!-- A3 -->
+    <div class="exercise" id="ex-a3">
+      <div class="exercise-header">
+        <strong>3.</strong> Nota de jurnal este scrisă sub formă de:
+        <span class="points">2 puncte</span>
+      </div>
+      <div class="options">
+        <label><input type="radio" name="a3" value="a"> a) monolog</label>
+        <label><input type="radio" name="a3" value="b"> b) descriere</label>
+        <label><input type="radio" name="a3" value="c"> c) narațiune</label>
+        <label><input type="radio" name="a3" value="d"> d) dialog</label>
+      </div>
+    </div>
+
+    <!-- A4 -->
+    <div class="exercise" id="ex-a4">
+      <div class="exercise-header">
+        <strong>4.</strong> Jeni Acterian are sentimente contradictorii față de:
+        <span class="points">2 puncte</span>
+      </div>
+      <div class="options">
+        <label><input type="radio" name="a4" value="a"> a) Lucia Vasiliu</label>
+        <label><input type="radio" name="a4" value="b"> b) Cella Delavrancea</label>
+        <label><input type="radio" name="a4" value="c"> c) Sănduc Dragomir</label>
+        <label><input type="radio" name="a4" value="d"> d) Clody Berthola</label>
+      </div>
+    </div>
+
+    <!-- A5 -->
+    <div class="exercise" id="ex-a5">
+      <div class="exercise-header">
+        <strong>5.</strong> Notează Adevărat sau Fals
+        <span class="points">6 puncte</span>
+      </div>
+
+      <h3>TEXTUL 1</h3>
+      <table>
+        <tr><th>Enunțul</th><th style="width:160px">Răspuns</th></tr>
+        <tr>
+          <td>Doctorii i-au deschis imediat ușa lui Eusebiu.</td>
+          <td>
+            <span class="tf-btn" data-q="t1-1" data-val="true">Adevărat</span>
+            <span class="tf-btn" data-q="t1-1" data-val="false">Fals</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Eusebiu și Esther trăiesc în condiții grele.</td>
+          <td>
+            <span class="tf-btn" data-q="t1-2" data-val="true">Adevărat</span>
+            <span class="tf-btn" data-q="t1-2" data-val="false">Fals</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Întâmplarea relatată se petrece într-o noapte liniștită.</td>
+          <td>
+            <span class="tf-btn" data-q="t1-3" data-val="true">Adevărat</span>
+            <span class="tf-btn" data-q="t1-3" data-val="false">Fals</span>
+          </td>
+        </tr>
+      </table>
+
+      <h3>TEXTUL 2</h3>
+      <table>
+        <tr><th>Enunțul</th><th style="width:160px">Răspuns</th></tr>
+        <tr>
+          <td>Jeni Acterian urmează să meargă la doctor.</td>
+          <td>
+            <span class="tf-btn" data-q="t2-1" data-val="true">Adevărat</span>
+            <span class="tf-btn" data-q="t2-1" data-val="false">Fals</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Jeni Acterian are guturai în timpul verii.</td>
+          <td>
+            <span class="tf-btn" data-q="t2-2" data-val="true">Adevărat</span>
+            <span class="tf-btn" data-q="t2-2" data-val="false">Fals</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Autoarea jurnalului compară dragostea cu o boală.</td>
+          <td>
+            <span class="tf-btn" data-q="t2-3" data-val="true">Adevărat</span>
+            <span class="tf-btn" data-q="t2-3" data-val="false">Fals</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- A6-A9 open -->
+    <div class="exercise">
+      <div class="exercise-header"><strong>6.</strong> Trăsătură a jurnalului (1-3 enunțuri) <span class="points">6 puncte</span></div>
+      <textarea id="a6" placeholder="Scrie răspunsul aici..."></textarea>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header"><strong>7.</strong> Temă comună (min. 30 cuvinte) <span class="points">6 puncte</span></div>
+      <textarea id="a7" placeholder="Scrie răspunsul aici..."></textarea>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header"><strong>8.</strong> Atitudinea lui Jeni față de sine (50-100 cuvinte) <span class="points">6 puncte</span></div>
+      <textarea id="a8" placeholder="Scrie răspunsul aici..."></textarea>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header"><strong>9.</strong> Asociere cu alt text literar (50-100 cuvinte) <span class="points">6 puncte</span></div>
+      <textarea id="a9" placeholder="Scrie răspunsul aici..."></textarea>
+    </div>
+
+    <!-- ========== B ========== -->
+    <h2>B. LIMBA ROMÂNĂ</h2>
+
+    <div class="exercise" id="ex-b1">
+      <div class="exercise-header"><strong>1.</strong> Conțin hiat ambele cuvinte din seria: <span class="points">2 puncte</span></div>
+      <div class="options">
+        <label><input type="radio" name="b1" value="a"> a) „furioasă”, „unuia”</label>
+        <label><input type="radio" name="b1" value="b"> b) „trebuincioase”, „ea”</label>
+        <label><input type="radio" name="b1" value="c"> c) „lecui”, „stupefiat”</label>
+        <label><input type="radio" name="b1" value="d"> d) „ideea”, „iluzie”</label>
+      </div>
+    </div>
+
+    <div class="exercise" id="ex-b2">
+      <div class="exercise-header"><strong>2.</strong> Aparțin vocabularului fundamental toate cuvintele din seria: <span class="points">2 puncte</span></div>
+      <div class="options">
+        <label><input type="radio" name="b2" value="a"> a) să onoreze, sărmană, stupefiat</label>
+        <label><input type="radio" name="b2" value="b"> b) decizie, dificilă, servitori</label>
+        <label><input type="radio" name="b2" value="c"> c) soție, trebuincios, ftizie</label>
+        <label><input type="radio" name="b2" value="d"> d) casă, pat, femeie</label>
+      </div>
+    </div>
+
+    <div class="exercise" id="ex-b3">
+      <div class="exercise-header"><strong>3.</strong> Sensul structurii „în doi peri” este: <span class="points">2 puncte</span></div>
+      <div class="options">
+        <label><input type="radio" name="b3" value="a"> a) indecisă</label>
+        <label><input type="radio" name="b3" value="b"> b) simplă</label>
+        <label><input type="radio" name="b3" value="c"> c) intimidantă</label>
+        <label><input type="radio" name="b3" value="d"> d) ironică</label>
+      </div>
+    </div>
+
+    <div class="exercise" id="ex-b4">
+      <div class="exercise-header"><strong>4.</strong> Există relație de polisemie în seria: <span class="points">2 puncte</span></div>
+      <div class="options">
+        <label><input type="radio" name="b4" value="a"> a) masă / Masa corpului</label>
+        <label><input type="radio" name="b4" value="b"> b) bată / Vântul bate</label>
+        <label><input type="radio" name="b4" value="c"> c) râs / un râs cu blana</label>
+        <label><input type="radio" name="b4" value="d"> d) pipă / Medicul pipăi</label>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header"><strong>5.</strong> Transcrie 3 pronume + cazul <span class="points">6 puncte</span></div>
+      <textarea id="b5" placeholder="ex: acesta – demonstrativ, nominativ"></textarea>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header"><strong>6.</strong> Enunț asertiv (15 = subiect) + enunț exclamativ (iubire = CI) <span class="points">6 puncte</span></div>
+      <textarea id="b6" placeholder="(1) ...&#10;(2) ..."></textarea>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header"><strong>7.</strong> Rolul a 2 semne de punctuație <span class="points">6 puncte</span></div>
+      <textarea id="b7" placeholder="Scrie aici..."></textarea>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header"><strong>8.</strong> Completează formele corecte <span class="points">6 puncte</span></div>
+      <p>Pe ulițele <input type="text" id="b8-1" style="width:100px;display:inline"> (insulă, gen.) se aud încă strigătele <input type="text" id="b8-2" style="width:140px;display:inline"> (disperat, superl.) bărbat, a <input type="text" id="b8-3" style="width:90px;display:inline"> (care, m.sg.gen.) soție <input type="text" id="b8-4" style="width:110px;display:inline"> (a afla, part.) pe patul de suferință încă <input type="text" id="b8-5" style="width:80px;display:inline"> (a spera, imperfect) să-<input type="text" id="b8-6" style="width:50px;display:inline"> (clitic refl. dat.) revadă fiica.</p>
+    </div>
+
+    <!-- Compunere -->
+    <h2>SUBIECTUL al II-lea – Compunere (20 puncte)</h2>
+    <div class="exercise">
+      <p>Imaginează-ți că ai vizitat o insulă misterioasă. Scrie o notă de jurnal (min. 150 cuvinte, data 12 octombrie 2023) cu o secvență descriptivă și una explicativă (fiecare min. 30 cuvinte).</p>
+      <textarea id="comp" style="min-height:180px" placeholder="Scrie compunerea aici..."></textarea>
+    </div>
+
+    <!-- BUTON -->
+    <button class="btn-check" onclick="checkAnswers()">Verifică răspunsurile &amp; Calculează punctajul</button>
+
+    <div id="result-box"></div>
+
+  </div>
+
+  <footer>
+    Created by <strong>qShadow / 9xShadow / Vexor / Ciurlica Denis</strong><br>
+    Test interactiv – Evaluare Națională (simulare)
+  </footer>
+</div>
+
+<script>
+  // True/False buttons
+  document.querySelectorAll('.tf-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const q = this.dataset.q;
+      document.querySelectorAll(`.tf-btn[data-q="${q}"]`).forEach(b => {
+        b.classList.remove('selected-true', 'selected-false');
+      });
+      this.classList.add(this.dataset.val === 'true' ? 'selected-true' : 'selected-false');
+      this.dataset.selected = this.dataset.val;
+    });
+  });
+
+  function getTF(q) {
+    const sel = document.querySelector(`.tf-btn[data-q="${q}"][data-selected]`);
+    return sel ? sel.dataset.selected : null;
+  }
+
+  function checkAnswers() {
+    let score = 0;
+    let maxAuto = 0;
+    let feedback = [];
+
+    // A1 (2p)
+    maxAuto += 2;
+    const nume = (document.getElementById('a1-nume').value || '').toLowerCase().trim();
+    const an = (document.getElementById('a1-an').value || '').trim();
+    if ((nume.includes('jeni') || nume.includes('acterian')) && an === '1944') {
+      score += 2;
+      feedback.push('A1: +2p ✓');
+    } else {
+      feedback.push('A1: 0p (corect: Jeni Acterian / 1944)');
+    }
+
+    // A2
+    maxAuto += 2;
+    const a2 = document.querySelector('input[name="a2"]:checked');
+    if (a2 && a2.value === 'c') { score += 2; feedback.push('A2: +2p ✓'); }
+    else feedback.push('A2: 0p (corect: c)');
+
+    // A3
+    maxAuto += 2;
+    const a3 = document.querySelector('input[name="a3"]:checked');
+    if (a3 && a3.value === 'a') { score += 2; feedback.push('A3: +2p ✓'); }
+    else feedback.push('A3: 0p (corect: a)');
+
+    // A4
+    maxAuto += 2;
+    const a4 = document.querySelector('input[name="a4"]:checked');
+    if (a4 && a4.value === 'c') { score += 2; feedback.push('A4: +2p ✓'); }
+    else feedback.push('A4: 0p (corect: c)');
+
+    // A5 (6 x 1p)
+    const tfCorrect = {
+      't1-1': 'false', 't1-2': 'true', 't1-3': 'false',
+      't2-1': 'true', 't2-2': 'false', 't2-3': 'true'
+    };
+    Object.keys(tfCorrect).forEach(k => {
+      maxAuto += 1;
+      if (getTF(k) === tfCorrect[k]) {
+        score += 1;
+      }
+    });
+    feedback.push(`A5 (A/F): ${Object.keys(tfCorrect).filter(k => getTF(k) === tfCorrect[k]).length}/6 puncte`);
+
+    // B1-B4
+    const bAnswers = { b1: 'd', b2: 'd', b3: 'a', b4: 'a' };
+    Object.keys(bAnswers).forEach(name => {
+      maxAuto += 2;
+      const sel = document.querySelector(`input[name="${name}"]:checked`);
+      if (sel && sel.value === bAnswers[name]) {
+        score += 2;
+        feedback.push(`${name.toUpperCase()}: +2p ✓`);
+      } else {
+        feedback.push(`${name.toUpperCase()}: 0p (corect: ${bAnswers[name]})`);
+      }
+    });
+
+    // B8 partial (6p) - simple check
+    maxAuto += 6;
+    const b8 = [
+      document.getElementById('b8-1').value.trim().toLowerCase(),
+      document.getElementById('b8-2').value.trim().toLowerCase(),
+      document.getElementById('b8-3').value.trim().toLowerCase(),
+      document.getElementById('b8-4').value.trim().toLowerCase(),
+      document.getElementById('b8-5').value.trim().toLowerCase(),
+      document.getElementById('b8-6').value.trim().toLowerCase()
+    ];
+    const b8ok = ['insulei', 'celui mai disperat', 'căruia', 'aflându-se', 'spera', 'și'];
+    let b8score = 0;
+    b8.forEach((v, i) => {
+      if (v.includes(b8ok[i].split(' ')[0]) || v === b8ok[i]) b8score += 1;
+    });
+    score += b8score;
+    feedback.push(`B8: ${b8score}/6 puncte`);
+
+    // Open questions note
+    feedback.push('---');
+    feedback.push('A6–A9, B5–B7 și Compunerea se evaluează de profesor (nu sunt auto-punctate).');
+
+    // Display
+    const box = document.getElementById('result-box');
+    box.style.display = 'block';
+    let cls = 'score-low';
+    if (score >= maxAuto * 0.75) cls = 'score-ok';
+    else if (score >= maxAuto * 0.5) cls = 'score-mid';
+
+    box.className = cls;
+    const feedbackItems = feedback.map(item => {
+      const itemClass = item.includes('+') || item.includes('✓') ? 'feedback-ok' : 'feedback-neutral';
+      return `<li class="${itemClass}">${item}</li>`;
+    }).join('');
+
+    box.innerHTML = `
+      <div class="score-summary">
+        <span class="score-label">Punctaj automat</span>
+        <strong class="score-value">${score} / ${maxAuto}</strong>
+      </div>
+      <ul class="feedback-list">${feedbackItems}</ul>
+      <p class="teacher-note">Restul punctelor (A6-A9, B5-B7, Compunere ≈ 50p) se acordă de profesor.</p>
+    `;
+
+    box.scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
