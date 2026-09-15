@@ -185,6 +185,23 @@
     font-size: 0.85rem;
     border-top: 1px solid var(--border);
   }
+
+  .test-mode-link {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 10px 18px;
+    background: var(--accent);
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background .2s, transform .2s;
+  }
+
+  .test-mode-link:hover {
+    background: var(--primary);
+    transform: translateY(-1px);
+  }
   
   @media print {
     body { background: white; padding: 0; }
@@ -542,8 +559,9 @@
 
   <footer>
     Rezolvare realizată pe baza textelor din testul „Start pentru succes! Simulare Evaluare Națională” – clasele V-VIII<br>
-    Toate răspunsurile sunt justificate pe baza textelor date.<br>
-    Created by qShadow/9xShadow/Vexor/Ciurlica Denis
+    Toate răspunsurile sunt justificate pe baza textelor date.
+    <br>
+    <a class="test-mode-link" href="rezolvare.html">Intră în modul test</a>
   </footer>
 </div>
 </body>
